@@ -37,12 +37,12 @@ public class AsyncEstadisticas extends AsyncTask<Void, Void, ArrayList<Estadisti
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog= new ProgressDialog(c);
+       /* dialog= new ProgressDialog(c);
         dialog.setMessage("Cargando datos");
         dialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
         dialog.setCancelable(false);
         dialog.setMax(100);
-        dialog.show();
+        dialog.show();*/
 
     }
 
@@ -108,7 +108,7 @@ public class AsyncEstadisticas extends AsyncTask<Void, Void, ArrayList<Estadisti
     @Override
     protected void onPostExecute(ArrayList<Estadistica> stats) {
         super.onPostExecute(stats);
-        dialog.dismiss();
+      /*  dialog.dismiss();*/
 
 
     }

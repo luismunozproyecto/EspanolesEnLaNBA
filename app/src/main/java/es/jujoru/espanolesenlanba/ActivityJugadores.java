@@ -2,12 +2,14 @@ package es.jujoru.espanolesenlanba;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -25,6 +27,7 @@ public class ActivityJugadores extends AppCompatActivity {
     ArrayList<Jugador> jugadores = new ArrayList<>();
     RecyclerView rvJugadores;
     private static String URL_STAT = "https://stats.nba.com/stats/playergamelog";
+
 
 
     @Override
@@ -54,11 +57,9 @@ public class ActivityJugadores extends AppCompatActivity {
 
         Collections.addAll(jugadores, pau,marc,rubio,mirotic,willy,abrines,juancho,calderon,ibaka);
 
-
         for (Jugador j:jugadores) {
             j.setEstadisticas(CargarEstadisticas(j.getId(),"2018-19","Regular%20Season",this));
         }
-
         AdaptadorJugadores adapter=new AdaptadorJugadores(jugadores);
        adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +68,9 @@ public class ActivityJugadores extends AppCompatActivity {
                 Jugador jugador = obtenerJugador(rvJugadores.getChildAdapterPosition(v));
 
                 Toast.makeText(getApplicationContext(),"Hola "+jugador.getNombre(), Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(), ActivityEstadisticas.class);
+                i.putExtra("JUG",jugador);
+                startActivity(i);
             }
         });
         rvJugadores.setAdapter(adapter);

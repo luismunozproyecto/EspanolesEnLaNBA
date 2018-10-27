@@ -1,6 +1,9 @@
 package Modelos;
 
-public class Estadistica {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Estadistica implements Parcelable {
 
     String fecha;
     String partido;
@@ -49,6 +52,42 @@ public class Estadistica {
         this.t3c = t3c;
         this.t3per = t3per;
     }
+
+    protected Estadistica(Parcel in) {
+        fecha = in.readString();
+        partido = in.readString();
+        resultado = in.readString();
+        minutos = in.readInt();
+        puntos = in.readInt();
+        rebotes = in.readInt();
+        asistencias = in.readInt();
+        tapones = in.readInt();
+        perdidas = in.readInt();
+        robos = in.readInt();
+        rebotes_ofensivos = in.readInt();
+        rebotes_defensivos = in.readInt();
+        t2i = in.readInt();
+        t2c = in.readInt();
+        t2per = in.readDouble();
+        tli = in.readInt();
+        tlc = in.readInt();
+        tlper = in.readDouble();
+        t3i = in.readInt();
+        t3c = in.readInt();
+        t3per = in.readDouble();
+    }
+
+    public static final Creator<Estadistica> CREATOR = new Creator<Estadistica>() {
+        @Override
+        public Estadistica createFromParcel(Parcel in) {
+            return new Estadistica(in);
+        }
+
+        @Override
+        public Estadistica[] newArray(int size) {
+            return new Estadistica[size];
+        }
+    };
 
     public String getFecha() {
         return fecha;
@@ -216,5 +255,35 @@ public class Estadistica {
 
     public void setT3per(double t3per) {
         this.t3per = t3per;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fecha);
+        dest.writeString(partido);
+        dest.writeString(resultado);
+        dest.writeInt(minutos);
+        dest.writeInt(puntos);
+        dest.writeInt(rebotes);
+        dest.writeInt(asistencias);
+        dest.writeInt(tapones);
+        dest.writeInt(perdidas);
+        dest.writeInt(robos);
+        dest.writeInt(rebotes_ofensivos);
+        dest.writeInt(rebotes_defensivos);
+        dest.writeInt(t2i);
+        dest.writeInt(t2c);
+        dest.writeDouble(t2per);
+        dest.writeInt(tli);
+        dest.writeInt(tlc);
+        dest.writeDouble(tlper);
+        dest.writeInt(t3i);
+        dest.writeInt(t3c);
+        dest.writeDouble(t3per);
     }
 }
